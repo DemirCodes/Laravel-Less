@@ -63,6 +63,7 @@
                             <p class="alert alert-danger">{{$message}}</p>
                         @enderror
                     </div>
+                    <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email :</label>
                         <input type="email"  name="email" id="empCreateMail" aria-describedby="emailHelp"
                                placeholder="Please enter your email@ ..." class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}">
@@ -70,9 +71,9 @@
                             <p class="alert alert-danger">{{$message}}</p>
                         @enderror
                     </div>
-                    <label for="#empCreateAddress" class="form-label">Address :</label>
-                    <div class="input-group">
-                        <span class="input-group-text">Address :</span>
+                    <div class="input-group-md">
+                        <label for="#empCreateAddress" class="form-label">Address :</label>
+
                         <textarea  id="empCreateAddress" name="address" aria-label="With textarea"
                                   placeholder="Please enter your address 'Country/City' ..." class="form-control @error('address') is-invalid @enderror"></textarea>
                         @error('address')

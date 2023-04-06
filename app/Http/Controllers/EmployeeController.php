@@ -6,6 +6,7 @@ use App\Models\Employee;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use function Symfony\Component\Translation\t;
 
 class EmployeeController extends Controller
 {
@@ -34,6 +35,16 @@ class EmployeeController extends Controller
                 $employee->email=$request->email;
                 $employee->address=$request->address;
                 $employee->save();
+
+
+                if ($request->image){
+                    $ext = $request->image->getClientOriginalExtension();
+                    $newFileName = time().'.'.$ext;
+                    $request->image->move(public_path().'/uploads/employees/',$newFileName);
+                    $employee->image = $newFileName;
+                    $employee->save();
+                }
+
 
                 $request->session()->flash('success','employee added Successfully');
 
