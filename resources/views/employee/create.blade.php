@@ -45,9 +45,9 @@
     </div>
 </div>
 @if(Session::has('success'))
-<div class="alert alert-success">
-    {{  Session::get('success') }}
-</div>
+    <div class="alert alert-success">
+        {{  Session::get('success') }}
+    </div>
 @endif
 <div class="rows-lg-6">
     <div class="col-lg-12">
@@ -58,27 +58,31 @@
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Name :</label>
-                        <input type="text"  name="name" id="empCreateName" placeholder="Please enter your name" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}">
-                        @error('name')
-                            <p class="alert alert-danger">{{$message}}</p>
-                        @enderror
+                        <input type="text" name="name" id="empCreateName" placeholder="Please enter your name"
+                               class="form-control @if ($errors->has('name')) is-invalid @endif"
+                               value="{{old('name')}}">
+                        @if ($errors->has('name'))
+                            <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email :</label>
-                        <input type="email"  name="email" id="empCreateMail" aria-describedby="emailHelp"
-                               placeholder="Please enter your email@ ..." class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}">
-                        @error('email')
-                            <p class="alert alert-danger">{{$message}}</p>
-                        @enderror
+                        <input type="email" name="email" id="empCreateMail" aria-describedby="emailHelp"
+                               placeholder="Please enter your email@ ..."
+                               class="form-control @if ($errors->has('email')) is-invalid @endif">
+                        @if ($errors->has('email'))
+                            <div class="invalid-feedback">{{ $errors->first('email') }}</div>
+                        @endif
                     </div>
                     <div class="input-group-md">
                         <label for="#empCreateAddress" class="form-label">Address :</label>
 
-                        <textarea  id="empCreateAddress" name="address" aria-label="With textarea"
-                                  placeholder="Please enter your address 'Country/City' ..." class="form-control @error('address') is-invalid @enderror"></textarea>
-                        @error('address')
-                            <p class="alert alert-danger">{{$message}}</p>
-                        @enderror
+                        <textarea id="empCreateAddress" name="address" aria-label="With textarea"
+                                  placeholder="Please enter your address 'Country/City' ..."
+                                  class="form-control @if ($errors->has('name')) is-invalid @endif"></textarea>
+                        @if ($errors->has('address'))
+                            <div class="invalid-feedback">{{ $errors->first('adress') }}</div>
+                        @endif
                     </div>
                     <br>
                     <label for="#empCreateImage" class="form-label">Image :</label>

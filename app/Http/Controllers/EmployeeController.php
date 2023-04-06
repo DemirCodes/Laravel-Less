@@ -56,8 +56,46 @@ class EmployeeController extends Controller
     }
 
 
-    public function update(){
-        return view('employee.update');
+    public function edit($id){
+        $employee = Employee::findOrFail($id);
+        return view('employee.edit',['employee'=>$employee]);
 
+    }
+
+
+    public function update($id,Request $request){
+
+
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'email' => 'required',
+            'image' => 'sometimes|image:gif:png:jpg:jpeg'
+        ]);
+
+        if ( $validator->passes() ){
+            $employee = Employee::find($id);
+            $employee->name=$request->name;
+            $employee->email=$request->email;
+            $employee->address=$request->address;
+            $employee->save();
+
+
+            if ($request->image){
+                $ext = $request->image->getClientOriginalExtension();
+                $newFileName = time().'.'.$ext;
+                $request->image->move(public_path().'/uploads/employees/',$newFileName);
+                $employee->image = $newFileName;
+                $employee->save();
+            }
+
+
+            $request->session()->flash('success','employee added Successfully');
+
+            return redirect()->route('employee.index');
+        }else{
+
+            $employee = Employee::find($id);
+            return redirect()->route('employee.edit',$employee->id)->withErrors($validator)->withInput();
+        }
     }
 }

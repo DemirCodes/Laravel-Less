@@ -54,50 +54,55 @@
 <div class="rows-lg-6">
     <div class="col-lg-12">
         <div class="card" id="card">
-            <h5 class="card-header" style="border-bottom-color: black">Update Employee Form</h5>
+            <h5 class="card-header" style="border-bottom-color: black">Edit Employee Form</h5>
             <div class="card-body">
-                <form action="{{route('employee.store')}}">
+                <form action="{{route('employee.update',$employee->id)}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @method('put')
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Name :</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                        <input type="text" class="form-control @if ($errors->has('name')) is-invalid @endif" name="name"
                                id="empCreateName" placeholder="Please enter your name
-                               " value="{{old('name')}}">
-                        @error('name')
-                        <p class="valid-feedback">{{ $message }}</p>
-                        @enderror
+                               " value="{{old('name',$employee->name)}}">
+                        @if ($errors->has('name'))
+                            <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                        @endif
                     </div>
 
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email :</label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
+                        <input type="email" class="form-control @if ($errors->has('email')) is-invalid @endif"
+                               name="email"
                                id="empCreateMail" aria-describedby="emailHelp"
-                               placeholder="Please enter your email@ ..." value="{{old('email')}}">
-                        @error('email')
-                        <p class="valid-feedback">{{$message}}</p>
-                        @enderror
+                               placeholder="Please enter your email@ ..." value="{{old('email',$employee->email)}}">
+                        @if ($errors->has('email'))
+                            <div class="invalid-feedback">{{ $errors->first('email') }}</div>
+                        @endif
                     </div>
                     <label for="#empCreateAddress" class="form-label">Address :</label>
                     <div class="input-group">
                         <span class="input-group-text">Address :</span>
-                        <textarea class="form-control @error('address') is-invalid @enderror" name="address"
+                        <textarea class="form-control @if ($errors->has('address')) is-invalid @endif" name="address"
                                   id="empCreateAddress" aria-label="With textarea"
                                   placeholder="Please enter your address 'Country/City' ...
-                        ">{{old('address')}}</textarea>
-                        @error('address')
-                        <p class="valid-feedback">{{$message}}</p>
-                        @enderror
+                        ">{{old('address',$employee->address)}}</textarea>
+                        @if ($errors->has('address'))
+                            <div class="invalid-feedback">{{ $errors->first('address') }}</div>
+                        @endif
                     </div>
                     <br>
                     <label for="#empCreateImage" class="form-label">Image :</label>
                     <div class="input-group">
-                        <input type="file" name="image" class="form-control" id="empCreateImage"
-                               aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                        @error('image')
-                        <p class="valid-feedback">{{$message}}</p>
-                        @enderror
+                        <input type="file" name="image"
+                               class="form-control @if ($errors->has('image')) is-invalid @endif" id="empCreateImage"
+                               aria-describedby="inputGroupFileAddon04" value="{{old('image',$employee->image)}}"
+                               aria-label="Upload">
+                        @if ($errors->has('image'))
+                            <div class="invalid-feedback">{{ $errors->first('image') }}</div>
+                        @endif
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-success">Create</button>
+                    <button type="submit" class="btn btn-warning">Update</button>
                 </form>
             </div>
         </div>
