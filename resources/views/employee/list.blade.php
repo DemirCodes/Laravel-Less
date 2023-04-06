@@ -72,9 +72,11 @@
                             <td>{{$employee->name}}</td>
                             <td>{{$employee->email}}</td>
                             <td>{{$employee->address}}</td>
-                            <td>@if($employee->image != '' && file_exists(public_path().'$/uploads/employees/'.$employee->image))
-                                    <img src="{{url('uploads/employees'.$employee->image)}}" alt="" width="50" height="50" class="rounded-circle">
-                            @endif</td>
+                            <td>
+                                @if($employee->image != '' && file_exists(public_path().'$/download/employee/'.$employee->image))
+                                    <img src="{{url('uploads/employees'.$employee->image)}}" alt="" width="50" height="50" class="rounded-circle"> <!--- no img yeri bura path ı ayarlanacak-->
+                            @endif
+                            </td>
                             <td>
 
                                 <a href="{{ route('employee.update') }}" class="btn btn-warning">Update</a>
