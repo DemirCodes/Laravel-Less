@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("name");
             $table->string("email");
             $table->string("address")->default(null);
-            $table->string("image")->default(null);
+            $table->string("image")->nullable();
             $table->timestamps();
         });
     }

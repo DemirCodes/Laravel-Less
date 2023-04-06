@@ -9,10 +9,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
-Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
-Route::post('/employees',[EmployeeController::class,'store'])->name('employees.store');
-Route::get('/employees/update', [EmployeeController::class, 'update'])->name('employees.update');
+Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
+Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employee.create');
+Route::post('/employees',[EmployeeController::class,'store'])->name('employee.store');
+Route::get('/employees/update', [EmployeeController::class, 'update'])->name('employee.update');
 
 
 

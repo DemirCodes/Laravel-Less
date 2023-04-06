@@ -35,7 +35,7 @@
         <div class="h4">Employees</div>
         <div class="">
 
-            <a href="{{route('employees.index')}}" class="btn btn-dark">Back</a>
+            <a href="{{route('employee.index')}}" class="btn btn-dark">Back</a>
 
             <!-- Create Modal BUTTONS -->
             {{--            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">--}}
@@ -54,27 +54,35 @@
         <div class="card" id="card">
             <h5 class="card-header" style="border-bottom-color: black">Create Employee Form</h5>
             <div class="card-body">
-                <form action="" method="post">
+                <form action="{{route('employee.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Name :</label>
-                        <input type="text" class="form-control" id="empCreateName" placeholder="Please enter your name">
+                        <input type="text"  name="name" id="empCreateName" placeholder="Please enter your name" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}">
+                        @error('name')
+                            <p class="alert alert-danger">{{$message}}</p>
+                        @enderror
                     </div>
-                    <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email :</label>
-                        <input type="email" class="form-control" id="empCreateMail" aria-describedby="emailHelp"
-                               placeholder="Please enter your email@ ...">
+                        <input type="email"  name="email" id="empCreateMail" aria-describedby="emailHelp"
+                               placeholder="Please enter your email@ ..." class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}">
+                        @error('email')
+                            <p class="alert alert-danger">{{$message}}</p>
+                        @enderror
                     </div>
                     <label for="#empCreateAddress" class="form-label">Address :</label>
                     <div class="input-group">
                         <span class="input-group-text">Address :</span>
-                        <textarea class="form-control" id="empCreateAddress" aria-label="With textarea"
-                                  placeholder="Please enter your address 'Country/City' ..."></textarea>
+                        <textarea  id="empCreateAddress" name="address" aria-label="With textarea"
+                                  placeholder="Please enter your address 'Country/City' ..." class="form-control @error('address') is-invalid @enderror"></textarea>
+                        @error('address')
+                            <p class="alert alert-danger">{{$message}}</p>
+                        @enderror
                     </div>
                     <br>
                     <label for="#empCreateImage" class="form-label">Image :</label>
                     <div class="input-group">
-                        <input type="file" class="form-control" id="empCreateImage"
+                        <input type="file" class="form-control" name="image" id="empCreateImage"
                                aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                     </div>
                     <br>

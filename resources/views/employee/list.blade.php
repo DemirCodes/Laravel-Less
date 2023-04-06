@@ -34,7 +34,7 @@
         <div class="h4">Employees</div>
         <div class="">
 
-            <a href="{{route('employees.create')}}" class="btn btn-success">Create</a>
+            <a href="{{route('employee.create')}}" class="btn btn-success">Create</a>
 
             <!-- Create Modal BUTTONS -->
 {{--            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">--}}
@@ -68,14 +68,14 @@
 
                         <tr>
 
-                            <th scope="row">1</th>
+                            <th scope="row">{{$employee->id}}</th>
                             <td>{{$employee->name}}</td>
                             <td>{{$employee->email}}</td>
                             <td>{{$employee->address}}</td>
                             <td>{{$employee->image}}</td>
                             <td>
 
-                                <a href="{{ route('employees.update') }}" class="btn btn-warning">Update</a>
+                                <a href="{{ route('employee.update') }}" class="btn btn-warning">Update</a>
                                 <a href="#" class="btn btn-danger">Delete</a>
                                 {{--
 

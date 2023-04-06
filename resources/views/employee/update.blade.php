@@ -35,7 +35,7 @@
         <div class="h4">Employees</div>
         <div class="">
 
-            <a href="{{route('employees.index')}}" class="btn btn-dark">Back</a>
+            <a href="{{route('employee.index')}}" class="btn btn-dark">Back</a>
 
             <!-- Create Modal BUTTONS -->
             {{--            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">--}}
@@ -45,13 +45,18 @@
     </div>
 </div>
 
+@if(Session::has('success'))
+    <div class="alert alert-success">
+        {{Session::get('success')}}
+    </div>
+@endif
 
 <div class="rows-lg-6">
     <div class="col-lg-12">
         <div class="card" id="card">
             <h5 class="card-header" style="border-bottom-color: black">Update Employee Form</h5>
             <div class="card-body">
-                <form>
+                <form action="{{route('employee.store')}}">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Name :</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
