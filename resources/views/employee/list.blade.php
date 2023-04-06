@@ -76,7 +76,12 @@
                             <td>
 
                                 <a href="{{ route('employee.edit',$employee->id) }}" class="btn btn-warning">Edit</a>
-                                <a href="#" class="btn btn-danger">Delete</a>
+                                <a href="#" onclick="deleteEmployee({{$employee->id}})" class="btn btn-danger">Delete</a>
+                                <form id="employee-destroy-action-{{$employee->id}}" action="{{route('employee.destroy',$employee->id)}}" method="post">
+                                    @csrf
+                                    @method('delete');
+                                </form>
+
                                 {{--
 
 <button type="button" class="btn btn-warning "  data-bs-toggle="modal"--}}
@@ -97,6 +102,14 @@
     </div>
 </div>
 
+<script>
+    function deleteEmployee(id)
+    {
+        if(confirm("Are u sure ?")){
+                document.getElementById('employee-destroy-action-'+id).submit();
+        }
+    }
+</script>
 
 <!--*********************************MODALS START************************-->
 

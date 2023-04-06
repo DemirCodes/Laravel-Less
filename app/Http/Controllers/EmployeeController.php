@@ -98,4 +98,12 @@ class EmployeeController extends Controller
             return redirect()->route('employee.edit',$employee->id)->withErrors($validator)->withInput();
         }
     }
+
+
+    public function destroy($id,Request $request){
+         $employee = Employee::findOrFail($id);
+         $employee->delete();
+         $request->session()->flash('success','Employee deleted!');
+         return redirect()->route('employee.index');
+    }
 }
